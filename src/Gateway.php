@@ -78,6 +78,22 @@ class Gateway extends AbstractGateway
         return $this->setParameter('private_key', $value);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getTestMode()
+    {
+        return $this->getParameter('test_mode');
+    }
+
+    /**
+     * @return Gateway
+     */
+    public function setTestMode($value)
+    {
+        return $this->setParameter('test_mode', $value);
+    }
+
 
     /**
      * @return mixed
@@ -90,7 +106,7 @@ class Gateway extends AbstractGateway
     public function getClient()
     {
         if (is_null($this->client)) {
-            $this->client = new Client($this->getPublicKey(), $this->getPrivateKey());
+            $this->client = new Client($this->getPublicKey(), $this->getPrivateKey(), $this->getTestMode());
         }
 
         return $this->client;

@@ -20,8 +20,8 @@ class ValidateCredentialsRequest extends AbstractRequest
     {
         $publicKey = $this->getParameter('public_key', $this->getPublicKey());
         $privateKey = $this->getParameter('private_key', $this->getPrivateKey());
-
-        $services = (new Client($publicKey, $privateKey));
+        $testMode = $this->getParameter('test_mode', $this->getTestMode());
+        $services = (new Client($publicKey, $privateKey, $testMode));
         $services = $services->SendRequest('GET', 'b2b/working-areas');
         return $this->createResponse($services);
     }

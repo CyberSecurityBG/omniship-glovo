@@ -13,14 +13,16 @@ class Client
 
     protected $public_key;
     protected $private_key;
+    protected $test_mode;
     protected $error;
     const SERVICE_PRODUCTION_URL = 'https://api.glovoapp.com/';
     const TEST_URL = 'https://stageapi.glovoapp.com/';
 
-    public function __construct($public_key, $private_key)
+    public function __construct($public_key, $private_key, $test_mode)
     {
         $this->public_key = $public_key;
         $this->private_key = $private_key;
+        $this->test_mode = $test_mode;
     }
 
 
@@ -39,8 +41,13 @@ class Client
      */
     public function SendRequest($method, $endpoint, $data = [])
     {
+        if($this->test_mode == "true"){
+            $url = self::TEST_URL;
+        } else {
+            $url = self::SERVICE_PRODUCTION_URL;
+        }
         try {
-            $client = new HttpClient(['base_uri' => self::TEST_URL]);
+            $client = new HttpClient(['base_uri' => $url]);
             if($method == 'GET'){
                 $response = $client->get($endpoint, [
                     'headers' => [

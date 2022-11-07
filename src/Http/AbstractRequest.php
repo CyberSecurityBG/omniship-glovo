@@ -48,15 +48,20 @@ abstract class AbstractRequest extends BaseAbstractRequest implements RequestInt
         return $this->getParameter('private_key');
     }
 
-
-    public function setMoneyTransfer($value)
-    {
-        return $this->setParameter('money_transfer', $value);
+    /**
+     * @param $value
+     * @return mixed
+     */
+    public function setTestModey($value){
+        return $this->setParameter('test_mode', $value);
     }
 
-    public function getMoneyTransfer()
+    /**
+     * @return mixed
+     */
+    public function getTestMode()
     {
-        return $this->getParameter('money_transfer');
+        return $this->getParameter('test_mode');
     }
 
     abstract protected function createResponse($data);

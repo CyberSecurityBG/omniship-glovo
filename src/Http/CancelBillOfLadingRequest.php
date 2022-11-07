@@ -22,7 +22,7 @@ class CancelBillOfLadingRequest extends AbstractRequest
     public function sendData($data)
     {
         $params = $this->parameters->all();
-        $client = (new Client($this->getPublicKey(), $this->getPrivateKey()));
+        $client = (new Client($this->getPublicKey(), $this->getPrivateKey(), $this->getTestMode()));
         return $this->createResponse($client->SendRequest('POST', '/b2b/orders/'.$data.'/cancel'));
     }
 

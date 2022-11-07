@@ -56,7 +56,7 @@ class ShippingQuoteRequest extends AbstractRequest
      */
     public function sendData($data)
     {
-        $services = (new Client($this->getPublicKey(), $this->getPrivateKey()));
+        $services = (new Client($this->getPublicKey(), $this->getPrivateKey(), $this->getTestMode()));
         return $this->createResponse($services->SendRequest('POST', 'b2b/orders/estimate', $data));
     }
 
